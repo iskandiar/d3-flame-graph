@@ -38,7 +38,7 @@ export function allocationColorMapper (d) {
     const total = d.value
     const color = pickHex([0, 255, 40], [196, 245, 233], self / total)
 
-    return `rgb(${color.join()})`
+    return 'rgb(' + color.join() + ')'
 }
 
 export function offCpuColorMapper (d) {
@@ -64,7 +64,10 @@ export function offCpuColorMapper (d) {
 export function nodeJsColorMapper (d, originalColor) {
     let color = originalColor
 
-    const { v8_jit: v8JIT, javascript, optimized } = d.data.extras || {}
+    const extras = d.data.extras || {}
+    const v8JIT = extras.v8_jit
+    const javascript = extras.javascript
+    const optimized = extras.optimized
     // Non-JS JIT frames (V8 builtins) are greyed out.
     if (v8JIT && !javascript) {
         color = '#dadada'
@@ -89,7 +92,7 @@ export function nodeJsColorMapper (d, originalColor) {
             b = 0
             g = 100 + (150 * opt)
         }
-        color = `rgb(${r} , ${g}, ${b})`
+        color = 'rgb(' + r + ',' + g + ',' + b + ')'
     }
     return color
 }

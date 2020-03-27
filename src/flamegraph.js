@@ -63,7 +63,7 @@ export default function () {
     }
     var originalSearchHandler = searchHandler
 
-    let searchMatch = (d, term) => {
+    let searchMatch = function (d, term) {
         if (!term) {
             return false
         }
@@ -787,7 +787,7 @@ export default function () {
             colorMapper = originalColorMapper
             return chart
         }
-        colorMapper = (d) => {
+        colorMapper = function (d) {
             const originalColor = originalColorMapper(d)
             return _(d, originalColor)
         }
